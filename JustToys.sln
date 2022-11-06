@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftRasterizer", "SoftRasterizer\SoftRasterizer.csproj", "{2CDE05B8-8EBF-417E-B059-1B50EBB9F311}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SoftRasterizer_CLI", "SoftRasterizer_CLI", "{05D312DA-836A-4278-881A-4CE5941BF0FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,5 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {301F1198-00AD-440E-AE04-5463F8ED1976}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2CDE05B8-8EBF-417E-B059-1B50EBB9F311} = {05D312DA-836A-4278-881A-4CE5941BF0FE}
 	EndGlobalSection
 EndGlobal
