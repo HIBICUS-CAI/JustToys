@@ -22,6 +22,28 @@ namespace SoftRasterizer
             }
         }
 
+        public Bitmap(int width, int height, byte r, byte g, byte b, byte a)
+        {
+            Width = width;
+            Height = height;
+            Color = new ColorRgba8[Width * Height];
+            for (int i = 0; i < Color.Length; i++)
+            {
+                Color[i] = new ColorRgba8(r, g, b, a);
+            }
+        }
+
+        public Bitmap(int width, int height, ColorRgba8 baseColor)
+        {
+            Width = width;
+            Height = height;
+            Color = new ColorRgba8[Width * Height];
+            for (int i = 0; i < Color.Length; i++)
+            {
+                Color[i] = new ColorRgba8(baseColor);
+            }
+        }
+
         public void SaveTo(string filePath, string fileName)
         {
             var finalPath = filePath + fileName;
@@ -108,11 +130,11 @@ namespace SoftRasterizer
             return color2DCoord;
         }
 
-        public void MapColorBy2dCoord(ColorRgba8[,] data)
+        public bool MapColorBy2dCoord(ColorRgba8[,] data)
         {
-            if (data.GetLength(0) * data.GetLength(1) != Width * Height)
+            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
             {
-                return;
+                return false;
             }
 
             for (int y = 0; y < Height; y++)
@@ -122,6 +144,7 @@ namespace SoftRasterizer
                     Color[y * Width + x] = data[x, y];
                 }
             }
+            return true;
         }
 
         public int Width { get => m_width; set => m_width = value; }
