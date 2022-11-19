@@ -23,5 +23,21 @@ namespace SoftRasterizer
             B = b;
             A = a;
         }
+
+        public void SetColor(byte r, byte g, byte b, byte a)
+        {
+            R = r;
+            G = g;
+            B = b;
+            A = a;
+        }
+
+        public void SetColor(ColorRgba8 color)
+        {
+            R = color.R;
+            G = color.G;
+            B = color.B;
+            A = color.A;
+        }
     }
 }

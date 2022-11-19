@@ -15,13 +15,11 @@ namespace SoftRasterizer
                 buffer[i] = (byte)i;
             }
 
-            var bmp = new Bitmap(1600, 1600);
+            var bmp = new Bitmap(800, 800);
             for (int i = 0; i < bmp.Color.Length; i++)
             {
-                bmp.Color[i].R = 255;
-                bmp.Color[i].G = 0;
-                bmp.Color[i].B = 0;
-                bmp.Color[i].A = 127;
+                var baseColor = new ColorRgba8(255, 0, 0, 127);
+                bmp.Color[i].SetColor(baseColor);
             }
             var color2d = bmp.GetColorAs2dCoord();
             for (int y = 0; y < bmp.Height; y++)
@@ -30,10 +28,7 @@ namespace SoftRasterizer
                 {
                     if (x == y)
                     {
-                        color2d[x, y].R = 255;
-                        color2d[x, y].G = 255;
-                        color2d[x, y].B = 255;
-                        color2d[x, y].A = 255;
+                        color2d[x, y].SetColor(255, 255, 255, 255);
                     }
                 }
             }
