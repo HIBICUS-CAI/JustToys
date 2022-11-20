@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Drawing;
 
 namespace SoftRasterizer
 {
@@ -34,6 +35,17 @@ namespace SoftRasterizer
         }
 
         public Bitmap(int width, int height, ColorRgba8 baseColor)
+        {
+            Width = width;
+            Height = height;
+            Color = new ColorRgba8[Width * Height];
+            for (int i = 0; i < Color.Length; i++)
+            {
+                Color[i] = new ColorRgba8(baseColor);
+            }
+        }
+
+        public Bitmap(int width, int height, Color baseColor)
         {
             Width = width;
             Height = height;
