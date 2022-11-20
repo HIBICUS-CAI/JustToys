@@ -66,5 +66,13 @@ namespace SoftRasterizer
             B = color.B;
             A = color.A;
         }
+
+        public void SetColor(Color color)
+        {
+            R = color.R;
+            G = color.G;
+            B = color.B;
+            A = color.A;
+        }
     }
 }

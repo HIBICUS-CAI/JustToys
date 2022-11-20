@@ -125,7 +125,7 @@ namespace SoftRasterizer
 
         public ColorRgba8 GetColorAt(int x, int y)
         {
-            return Canvas[y * Height + x];
+            return Canvas[y * Width + x];
         }
 
         public ColorRgba8[,] GetCanvasAs2dCoord()
