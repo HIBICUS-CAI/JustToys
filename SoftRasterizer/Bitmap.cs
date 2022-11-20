@@ -10,16 +10,16 @@ namespace SoftRasterizer
     {
         int m_width;
         int m_height;
-        ColorRgba8[] m_color;
+        ColorRgba8[] m_canvas;
 
         public Bitmap(int width, int height)
         {
             Width = width;
             Height = height;
-            Color = new ColorRgba8[Width * Height];
-            for (int i = 0; i < Color.Length; i++)
+            Canvas = new ColorRgba8[Width * Height];
+            for (int i = 0; i < Canvas.Length; i++)
             {
-                Color[i] = new ColorRgba8(0, 0, 0, 0);
+                Canvas[i] = new ColorRgba8(0, 0, 0, 0);
             }
         }
 
@@ -27,10 +27,10 @@ namespace SoftRasterizer
         {
             Width = width;
             Height = height;
-            Color = new ColorRgba8[Width * Height];
-            for (int i = 0; i < Color.Length; i++)
+            Canvas = new ColorRgba8[Width * Height];
+            for (int i = 0; i < Canvas.Length; i++)
             {
-                Color[i] = new ColorRgba8(r, g, b, a);
+                Canvas[i] = new ColorRgba8(r, g, b, a);
             }
         }
 
@@ -38,10 +38,10 @@ namespace SoftRasterizer
         {
             Width = width;
             Height = height;
-            Color = new ColorRgba8[Width * Height];
-            for (int i = 0; i < Color.Length; i++)
+            Canvas = new ColorRgba8[Width * Height];
+            for (int i = 0; i < Canvas.Length; i++)
             {
-                Color[i] = new ColorRgba8(baseColor);
+                Canvas[i] = new ColorRgba8(baseColor);
             }
         }
 
@@ -49,10 +49,10 @@ namespace SoftRasterizer
         {
             Width = width;
             Height = height;
-            Color = new ColorRgba8[Width * Height];
-            for (int i = 0; i < Color.Length; i++)
+            Canvas = new ColorRgba8[Width * Height];
+            for (int i = 0; i < Canvas.Length; i++)
             {
-                Color[i] = new ColorRgba8(baseColor);
+                Canvas[i] = new ColorRgba8(baseColor);
             }
         }
 
@@ -87,12 +87,12 @@ namespace SoftRasterizer
             stream.Write(BitConverter.GetBytes(bits), 0, 2);
 
             var byteBuffer = new byte[Width * Height * 3];
-            for (int i = 0; i < Color.Length; i++)
+            for (int i = 0; i < Canvas.Length; i++)
             {
-                float alpha = Color[i].A / 255.0f;
-                byte r8 = (byte)((float)Color[i].R * alpha);
-                byte g8 = (byte)((float)Color[i].G * alpha);
-                byte b8 = (byte)((float)Color[i].B * alpha);
+                float alpha = Canvas[i].A / 255.0f;
+                byte r8 = (byte)((float)Canvas[i].R * alpha);
+                byte g8 = (byte)((float)Canvas[i].G * alpha);
+                byte b8 = (byte)((float)Canvas[i].B * alpha);
 
                 byteBuffer[i * 3 + 0] = b8;
                 byteBuffer[i * 3 + 1] = g8;
@@ -125,24 +125,24 @@ namespace SoftRasterizer
 
         public ColorRgba8 GetColorAt(int x, int y)
         {
-            return Color[y * Height + x];
+            return Canvas[y * Height + x];
         }
 
-        public ColorRgba8[,] GetColorAs2dCoord()
+        public ColorRgba8[,] GetCanvasAs2dCoord()
         {
-            var color2DCoord = new ColorRgba8[Width, Height];
+            var canvas2DCoord = new ColorRgba8[Width, Height];
             for (int y = 0; y < Height; y++)
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    color2DCoord[x, y] = Color[y * Width + x];
+                    canvas2DCoord[x, y] = Canvas[y * Width + x];
                 }
             }
 
-            return color2DCoord;
+            return canvas2DCoord;
         }
 
-        public bool MapColorBy2dCoord(ColorRgba8[,] data)
+        public bool MapCanvasBy2dCoord(ColorRgba8[,] data)
         {
             if (data.GetLength(0) != Width || data.GetLength(1) != Height)
             {
@@ -153,7 +153,7 @@ namespace SoftRasterizer
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    Color[y * Width + x] = data[x, y];
+                    Canvas[y * Width + x] = data[x, y];
                 }
             }
             return true;
@@ -161,6 +161,6 @@ namespace SoftRasterizer
 
         public int Width { get => m_width; set => m_width = value; }
         public int Height { get => m_height; set => m_height = value; }
-        public ColorRgba8[] Color { get => m_color; set => m_color = value; }
+        public ColorRgba8[] Canvas { get => m_canvas; set => m_canvas = value; }
     }
 }
