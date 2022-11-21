@@ -28,8 +28,6 @@ namespace SoftRasterizer
             endX = endX <= dist.Width - 1 ? endX : dist.Width - 1;
             endY = endY <= dist.Height - 1 ? endY : dist.Height - 1;
 
-            var canvas = dist.GetCanvasAs2dCoord();
-
             for (int y = startY; y <= endY; y++)
             {
                 for (int x = startX; x <= endX; x++)
@@ -50,18 +48,18 @@ namespace SoftRasterizer
                     {
                         factor = 0.5f - factor;
                     }
-                    var originColor = canvas[x, y];
+                    var targetColor = dist.GetColorAt(x, y);
                     var newColor = new ColorRgba8(color);
                     newColor.R = MathHelper.Lerp(
-                        newColor.R, originColor.R, factor);
+                        newColor.R, targetColor.R, factor);
                     newColor.G = MathHelper.Lerp(
-                        newColor.G, originColor.G, factor);
+                        newColor.G, targetColor.G, factor);
                     newColor.B = MathHelper.Lerp(
-                        newColor.B, originColor.B, factor);
+                        newColor.B, targetColor.B, factor);
                     newColor.A = MathHelper.Lerp(
-                        newColor.A, originColor.A, factor);
+                        newColor.A, targetColor.A, factor);
 
-                    canvas[x, y].SetColor(newColor);
+                    targetColor.SetColor(newColor);
                 }
             }
         }

@@ -17,6 +17,18 @@ namespace SoftRasterizer
             var col = Color.FromArgb(255, 255, 255, 255);
             TopologyPainter.DrawPoint(bmp, pos, col);
 
+            var ra = new Random();
+            for (int i = 0; i < 1000; i++)
+            {
+                pos.X = ra.Next(0, 1279);
+                pos.Y = ra.Next(0, 719);
+                var r = ra.Next(0, 255);
+                var g = ra.Next(0, 255);
+                var b = ra.Next(0, 255);
+                col = Color.FromArgb(255, r, g, b);
+                TopologyPainter.DrawPoint(bmp, pos, col);
+            }
+
             bmp.SaveTo("./", "temp.bmp");
 
             Process.Start("powershell.exe", "./temp.bmp");
