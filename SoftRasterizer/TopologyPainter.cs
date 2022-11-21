@@ -12,8 +12,8 @@ namespace SoftRasterizer
         public static void DrawPoint(Vector3 pos, Bitmap dist, Color color)
         {
             var pointRadius = GraphicConfig.PointSize / 2.0f;
-            var start = (int)-pointRadius - 1;
-            var end = (int)pointRadius + 1;
+            var end = (int)MathF.Ceiling(pointRadius);
+            var start = -end;
             var centerX = (int)pos.X;
             var centerY = (int)pos.Y;
             var centerV = new Vector2(centerX, centerY);
@@ -25,8 +25,8 @@ namespace SoftRasterizer
             var endY = centerY + end;
             startX = startX >= 0 ? startX : 0;
             startY = startY >= 0 ? startY : 0;
-            endX = endX <= dist.Width ? endX : dist.Width;
-            endY = endY <= dist.Height ? endY : dist.Height;
+            endX = endX <= dist.Width - 1 ? endX : dist.Width - 1;
+            endY = endY <= dist.Height - 1 ? endY : dist.Height - 1;
 
             var canvas = dist.GetCanvasAs2dCoord();
 
@@ -52,14 +52,14 @@ namespace SoftRasterizer
                     }
                     var originColor = canvas[x, y];
                     var newColor = new ColorRgba8(color);
-                    newColor.R = (byte)(newColor.R * factor +
-                        originColor.R * (1.0f - factor));
-                    newColor.G = (byte)(newColor.G * factor +
-                        originColor.G * (1.0f - factor));
-                    newColor.B = (byte)(newColor.B * factor +
-                        originColor.B * (1.0f - factor));
-                    newColor.A = (byte)(newColor.A * factor +
-                        originColor.A * (1.0f - factor));
+                    newColor.R = MathHelper.Lerp(
+                        newColor.R, originColor.R, factor);
+                    newColor.G = MathHelper.Lerp(
+                        newColor.G, originColor.G, factor);
+                    newColor.B = MathHelper.Lerp(
+                        newColor.B, originColor.B, factor);
+                    newColor.A = MathHelper.Lerp(
+                        newColor.A, originColor.A, factor);
 
                     canvas[x, y].SetColor(newColor);
                 }
