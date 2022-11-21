@@ -9,7 +9,7 @@ namespace SoftRasterizer
 {
     internal class TopologyPainter
     {
-        public static void DrawPoint(Vector3 pos, Bitmap dist, Color color)
+        public static void DrawPoint(Bitmap dist, Vector3 pos, Color color)
         {
             var pointRadius = GraphicConfig.PointSize / 2.0f;
             var end = (int)MathF.Ceiling(pointRadius);

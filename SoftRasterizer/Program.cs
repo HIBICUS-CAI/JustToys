@@ -15,7 +15,7 @@ namespace SoftRasterizer
 
             var pos = new Vector3(640.0f, 360.0f, 5.0f);
             var col = Color.FromArgb(255, 255, 255, 255);
-            TopologyPainter.DrawPoint(pos, bmp, col);
+            TopologyPainter.DrawPoint(bmp, pos, col);
 
             bmp.SaveTo("./", "temp.bmp");
 
