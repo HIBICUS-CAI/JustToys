@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Numerics;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace SoftRasterizer
 {
@@ -31,7 +32,14 @@ namespace SoftRasterizer
 
             bmp.SaveTo("./", "temp.bmp");
 
-            Process.Start("powershell.exe", "./temp.bmp");
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Process.Start("powershell.exe", "./temp.bmp");
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                Process.Start("bash");
+            }
         }
     }
 }
